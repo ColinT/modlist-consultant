@@ -14,7 +14,8 @@ const { promisify } = require('util');
 // Pre-fetch spreadsheet since its reference is reusable
 // @ts-ignore
 import GoogleSpreadsheet = require('google-spreadsheet');
-const credentials = JSON.parse(process.env.G_SPREADSHEET_CREDENTIALS as string);
+const ENV_CRED = process.env.G_SPREADSHEET_CREDENTIALS as string;
+const credentials = JSON.parse(ENV_CRED.replace('\'', '')); // Get rid of unecessary quotemarks for heroku. JSON should use double quotes
 const doc = new GoogleSpreadsheet(process.env.G_SPREADSHEET_ID);
 
 enum Compatibility {
