@@ -4,7 +4,7 @@
   "description": "Web API for mass modlist compatibility checking",
   "main": "build/index.js",
   "scripts": {
-    "start": "npm run build && node dist/bundle.js",
+    "start": "npm run build && node ./dist/bundle.js",
     "build": "webpack --config webpack.config.js & copyfiles -u 1 ./src/**/*.html ./src/**/*.js ./dist",
     "test": "test",
     "tsc": "tsc"
