@@ -1,5 +1,5 @@
 # Modlist Consultant
-A web tool and API for the [Rimworld Multiplayer Mod](https://github.com/Zetrith/Multiplayer) by [Zetrith](https://github.com/Zetrith).
+A web tool and API for checking mod compatibility with the [Rimworld Multiplayer Mod](https://github.com/Zetrith/Multiplayer) by [Zetrith](https://github.com/Zetrith).
 
 ##### Table of Contents  
 [Usage](#usage)  
@@ -13,7 +13,9 @@ A web tool and API for the [Rimworld Multiplayer Mod](https://github.com/Zetrith
 
 To use the API:
 `curl -d "@/path/to/ModsConfig.xml" -H "Content-Type: text/xml" -X POST https://modlist-consultant.herokuapp.com/consult`
+
 Accepts `application/xml` or `text/xml`
+
 Returns `application/json` in the format:
 ```ts
 interface ResponseFormat {
@@ -62,7 +64,9 @@ npm run build
 
 ## Resources
 [Google spreadsheet data source](https://docs.google.com/spreadsheets/d/1jaDxV8F7bcz4E9zeIRmZGKuaX7d0kvWWq28aKckISaY) (Thank-you maintainers!)
+
 [Rimworld Multiplayer Mod](https://github.com/Zetrith/Multiplayer) by [Zetrith](https://github.com/Zetrith)
+
 [Rimworld Multiplayer Discord](https://discord.gg/S4bxXpv) You can find me here as ZenonX
 
 ## Contact
