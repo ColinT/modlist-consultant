@@ -51,6 +51,7 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('internal server error! XML Parse failed!');
+    return;
   }
 
   // Get all active mods
@@ -59,13 +60,28 @@ router.post('/', async (req, res) => {
     .filter((id: string) => !modIgnore.includes(id));
 
   // Initialize google spreadsheet auth and sanity check metadata
-  await promisify(doc.useServiceAccountAuth)(credentials); // Authenticate with service account; The sheet is not published to the web (requires OAuth)
-  const info = await promisify(doc.getInfo)();
-  console.log(`Loaded doc: ` + info.title + ` by ` + info.author.email)
-  const sheet = info.worksheets[0]
-  console.log(
-    `sheet 1: ` + sheet.title + ` ` + sheet.rowCount + `x` + sheet.colCount
-  );
+  try {
+    await promisify(doc.useServiceAccountAuth)(credentials); // Authenticate with service account; The sheet is not published to the web (requires OAuth)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('internal server error! ServiceAccount authorization failed!');
+    return;
+  }
+  
+  let sheet;
+  try {
+    const info = await promisify(doc.getInfo)();
+    console.log(`Loaded doc: ` + info.title + ` by ` + info.author.email)
+    sheet = info.worksheets[0]
+    console.log(
+      `sheet 1: ` + sheet.title + ` ` + sheet.rowCount + `x` + sheet.colCount
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('internal server error! Failed to retrieve spreadsheet data!');
+    return;
+  }
+  
 
   // Grab every mod steam id on the sheet so we can search through it
   // TODO combine requests
