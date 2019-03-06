@@ -3,9 +3,9 @@ A web tool and API for the [Rimworld Multiplayer Mod](https://github.com/Zetrith
 
 ##### Table of Contents  
 [Usage](#usage)  
-[Running Locally](#running-locally)
-[Contributing](#contributing)
-[Resources](#resources)
+[Running Locally](#running-locally)  
+[Contributing](#contributing)  
+[Resources](#resources)  
 [Contact](#contact)
 
 ## Usage
