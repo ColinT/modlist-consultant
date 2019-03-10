@@ -85,9 +85,9 @@ router.post('/', async (req, res) => {
 
   // Grab every mod steam id on the sheet so we can search through it
   // TODO combine requests
-  // steam ids are in C3:C${sheet.rowCount}
   let steamIdCells: any, modNameCells: any, compatibilityCells: any; // TODO add strict typing
   try {
+    // steam ids are in C3:C${sheet.rowCount}
     steamIdCells = await promisify(sheet.getCells)({'min-row': 3, 'max-row': sheet.rowCount, 'min-col': 3, 'max-col': 3});
     // mod names are in B3:B${sheet.rowCount}
     modNameCells = await promisify(sheet.getCells)({'min-row': 3, 'max-row': sheet.rowCount, 'min-col': 2, 'max-col': 2});
