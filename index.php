@@ -5,6 +5,7 @@
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -21,7 +22,7 @@
                   <a class="nav-item nav-link active" href="#">Mod Check <span class="sr-only">(current)</span></a>
                   <a class="nav-item nav-link" href="#">ModList Check</a>
                   <a class="nav-item nav-link" href="#">Browse Database</a>
-                  <a class="nav-item nav-link" href="#">Useful Links</a>
+                  <a class="nav-item nav-link" href="links.html">Useful Links</a>
                 </div>
             </div>
         </nav>
@@ -48,18 +49,30 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
                 
-                $sql = "SELECT * FROM knownMods";
+                $sql = "SELECT * FROM Modlist";
 
                 $result = $conn->query($sql);
 
                  while($row = mysqli_fetch_array($result))
                  {
                     echo "<tr>";
-                        echo "<td>" . $row['compatibiliy'] . "</td>";
-                        echo "<td>" . $row['modName'] . "</td>";
-                        echo "<td>" . $row['steamId'] . "</td>";
-                        echo "<td>" . $row['tags'] . "</td>";
-                        echo "<td>" . $row['notes'] . "</td>";
+                     $cur = $row['Status'];
+                        switch ($cur) {
+                            case "0":
+                                echo "<td><i class='fas fa-question'></i></td>";
+                            case "1":
+                                echo "<td><i class='fas fa-radiation'></i></td>";
+                            case "2":
+                                echo "<td><i class='fas fa-exclamation-triangle'></i></td>";
+                            case "3":
+                                echo "<td><i class='fas fa-exclamation'></i></td>";
+                            case "4":
+                                echo "<td><i class='fas fa-check'></i></td>";
+                        }
+                        echo "<td>" . $row['Mod name'] . "</td>";
+                        echo "<td>" . $row['Steam id'] . "</td>";
+                        echo "<td>" . $row['Tags'] . "</td>";
+                        echo "<td>" . $row['Notes'] . "</td>";
                     echo "</tr>";
                  }
                 echo "</table>";
