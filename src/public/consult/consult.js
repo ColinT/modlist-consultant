@@ -1,3 +1,5 @@
+$('#loading').hide(); // Initialize hidden
+
 function checkModList(modListFileInput) {
   const input = modListFileInput;
   
@@ -12,6 +14,7 @@ function checkModList(modListFileInput) {
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () { // Use non-arrow function for autobind
           if (this.readyState === 4 && this.status === 200) {
+            $('#loading').hide();
             document.querySelector('#results').innerHTML = convertJsonToHtmlTable(['steamId', 'modName', 'compatibility'], JSON.parse(xhr.responseText));
           }
         }
@@ -22,6 +25,7 @@ function checkModList(modListFileInput) {
         xhr.open('POST', `${baseUrl}/consult`);
         xhr.setRequestHeader('Content-Type', 'text/xml');
         xhr.send(event.target.result);
+        $('#loading').show();
       }
     }
   }
