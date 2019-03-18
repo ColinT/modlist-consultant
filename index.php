@@ -60,14 +60,19 @@
                         switch ($cur) {
                             case "0":
                                 echo "<td><i class='fas fa-question'></i></td>";
+                                break;
                             case "1":
                                 echo "<td><i class='fas fa-radiation'></i></td>";
+                                break;
                             case "2":
                                 echo "<td><i class='fas fa-exclamation-triangle'></i></td>";
+                                break;
                             case "3":
                                 echo "<td><i class='fas fa-exclamation'></i></td>";
+                                break;
                             case "4":
                                 echo "<td><i class='fas fa-check'></i></td>";
+                                break;
                         }
                         echo "<td>" . $row['Mod name'] . "</td>";
                         echo "<td>" . $row['Steam id'] . "</td>";
